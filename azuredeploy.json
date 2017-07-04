@@ -1,0 +1,147 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "siteName": {
+            "defaultValue": "ttrss",
+            "type": "string"
+        },
+        "hostingPlanName": {
+            "defaultValue": "ttrss",
+            "type": "string"
+        },
+        "siteLocation": {
+            "allowedValues": [
+                "South Central US",
+                "North Europe",
+                "West Europe",
+                "Southeast Asia",
+                "Korea Central",
+                "Korea South",
+                "West US",
+                "East US",
+                "Japan West",
+                "Japan East",
+                "East Asia",
+                "East US 2",
+                "North Central US",
+                "Central US",
+                "Brazil South",
+                "Australia East",
+                "Australia Southeast",
+                "West India",
+                "Central India",
+                "South India",
+                "Canada Central",
+                "Canada East",
+                "West Central US",
+                "UK West",
+                "UK South",
+                "West US 2",
+                "MSFT West US",
+                "MSFT East US",
+                "MSFT East Asia",
+                "MSFT North Europe",
+                "East US 2 (Stage)",
+                "East Asia (Stage)",
+                "Central US (Stage)",
+                "North Central US (Stage)",
+                "East US 2 EUAP",
+                "Central US EUAP"
+            ],
+            "type": "string"
+        },
+        "sku": {
+            "defaultValue": "Free",
+            "allowedValues": [
+                "Free"
+            ],
+            "type": "string"
+        }
+    },
+    "variables": {
+        "workersize": "0"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "name": "[parameters('hostingPlanName')]",
+            "apiVersion": "2014-06-01",
+            "location": "[parameters('siteLocation')]",
+            "properties": {
+                "name": "[parameters('hostingPlanName')]",
+                "sku": "[parameters('sku')]",
+                "workerSize": "[variables('workersize')]",
+                "numberOfWorkers": 1
+            }
+        },
+        {
+            "type": "Microsoft.Web/Sites",
+            "name": "[parameters('siteName')]",
+            "apiVersion": "2014-06-01",
+            "location": "[parameters('siteLocation')]",
+            "tags": {
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "empty"
+            },
+            "properties": {
+                "name": "[parameters('siteName')]",
+                "serverFarm": "[parameters('hostingPlanName')]",
+                "siteConfig": {
+                    "localMySqlEnabled": "true"
+                }
+            },
+            "resources": [
+                {
+                    "type": "config",
+                    "name": "web",
+                    "apiVersion": "2015-08-01",
+                    "properties": {
+                      "appSettings": [
+                        {
+                          "name": "PHP_INI_SCAN_DIR",
+                          "value": "d:\\home\\site\\wwwroot\\extraphpini.ini"
+                        },
+                        {
+                          "": "DB_TYPE",
+                          "value": "mysql"
+                        },
+                        {
+                          "name": "DB_USER",
+                          "value": "azure"
+                        },
+                        {
+                          "name": "DB_NAME",
+                          "value": "localdb"
+                        },
+                        {
+                          "name": "SCM_REPOSITORY_PATH",
+                          "value": "d:\\home\\site\\wwwroot"
+                        },
+                        {
+                          "name": "SCM_USE_SHALLOW_CLONE",
+                          "value": "1"
+                        },
+                        {
+                          "name": "SCM_TARGET_PATH",
+                          "value": "d:\\home\\site\\wwwroot"
+                        }
+
+                      ],
+                        "phpVersion": "7.1",
+                        "defaultDocuments": [
+                            "index.php",
+                            "index.html",
+                            "index.htm"
+                        ]
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/Sites/', parameters('siteName'))]"
+                    ]
+                }
+            ],
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverFarms/', parameters('hostingPlanName'))]"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,5 @@
+﻿[config]
+SCM_REPOSITORY_PATH=d:\home\site\wwwroot
+SCM_TARGET_PATH=d:\home\site\wwwroot
+SCM_USE_SHALLOW_CLONE=1
+SCM_USE_LIBGIT2SHARP_REPOSITORY=0
