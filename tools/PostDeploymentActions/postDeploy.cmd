@@ -1,1 +1,0 @@
-touch D:\home\site\wwwroot\POSTDEPLOYWASHERE.txt

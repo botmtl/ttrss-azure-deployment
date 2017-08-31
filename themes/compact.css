@@ -1,0 +1,17 @@
+@import "default.php";
+
+body,
+.claro .dijitMenu .dijitMenuItemLabel,
+.claro .cdmContentInner,
+.claro #content-insert,
+.claro .cdm .cdmContent,
+.claro .postReply .postContent { 
+	font-size : 12px ! important;
+}
+
+.claro .postReply .postHeader,
+.claro #floatingTitle a.title,
+.claro .cdm .title {
+	font-size : 13px ! important;
+}
+
