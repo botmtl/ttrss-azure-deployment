@@ -650,6 +650,10 @@
     <Folder Include="utils\gitlab-ci\" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Content Include=".deployment" />
+>>>>>>> 2f67b51... init
     <Content Include=".gitignore" />
     <Content Include=".gitlab-ci.yml" />
     <Content Include="atom-to-html.xsl" />
@@ -669,6 +673,10 @@
     <Content Include="css\tt-rss.css" />
     <Content Include="css\utility.css" />
     <Content Include="css\zoom.css" />
+<<<<<<< HEAD
+=======
+    <Content Include="deploy.cmd" />
+>>>>>>> 2f67b51... init
     <Content Include="feed-icons\.empty" />
     <Content Include="feed-icons\index.html" />
     <Content Include="images\alert.png" />
@@ -2928,6 +2936,10 @@
     <Content Include="plugins\shorten_expanded\init.js" />
     <Content Include="plugins\toggle_sidebar\application_side_list.png" />
     <Content Include="plugins\vf_shared\share.png" />
+<<<<<<< HEAD
+=======
+    <Content Include="TextFile1.txt" />
+>>>>>>> 2f67b51... init
     <None Include="Properties\PublishProfiles\TTRSSAPPNAME - Web Deploy.pubxml" />
     <Content Include="README.md" />
     <Content Include="schema\ttrss_schema_mysql.sql" />

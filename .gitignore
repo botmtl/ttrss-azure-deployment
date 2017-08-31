@@ -16,4 +16,11 @@ tags
 cache/htmlpurifier/*/*ser
 lib/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer/*/*ser
 web.config
+<<<<<<< HEAD
 cache
+=======
+obj
+/Properties/PublishProfiles/TTRSSAPPNAME - Web Deploy.pubxml.user
+PublishProfiles
+.vs
+>>>>>>> 2f67b51... init
