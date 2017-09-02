@@ -1,6 +1,8 @@
 @echo off
 echo Deploying files...
 
+erase D:\home\site\wwwroot\hostingstart.html
+
 REM get tt-rss to wwwroot
 git clone --depth 1 https://git.tt-rss.org/git/tt-rss.git D:\home\site\wwwroot 
 
