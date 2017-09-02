@@ -43,7 +43,7 @@
       }
     },
     {
-      "apiVersion": "2015-08-01",
+      "apiVersion": "2016-08-01",
       "name": "[parameters('siteName')]",
       "type": "Microsoft.Web/Sites",
       "location": "[parameters('siteLocation')]",
@@ -55,12 +55,25 @@
         "serverFarmId": "[parameters('hostingPlanName')]",
         "siteConfig": {
           "localMySqlEnabled": true,
-           "appSettings": [
-            { "name": "WEBSITE_MYSQL_ENABLED", "value": "1" },
-            { "name": "WEBSITE_MYSQL_GENERAL_LOG", "value": "0" },
-            { "name": "WEBSITE_MYSQL_SLOW_QUERY_LOG", "value": "0" },
-            { "name": "WEBSITE_MYSQL_ARGUMENTS", "value": "--max_allowed_packet=16M" }
-          ]
+          "appSettings": [
+            {
+              "name": "WEBSITE_MYSQL_ENABLED",
+              "value": "1"
+            },
+            {
+              "name": "WEBSITE_MYSQL_GENERAL_LOG",
+              "value": "0"
+            },
+            {
+              "name": "WEBSITE_MYSQL_SLOW_QUERY_LOG",
+              "value": "0"
+            },
+            {
+              "name": "WEBSITE_MYSQL_ARGUMENTS",
+              "value": "--max_allowed_packet=16M"
+            }
+          ],
+          "defaultDocuments":  ["index.php"]
         }
       },
       "resources": [
