@@ -13,5 +13,9 @@ REM deploy database
 powershell -ExecutionPolicy bypass -File d:\home\site\repository\Execute-MySQLScript.ps1 -ScriptPath D:\home\site\wwwroot\schema\ttrss_schema_mysql.sql
 
 REM d:\home\site\wwwroot\app_data\jobs\triggered\updateFeeds
+mkdir d:\home\site\wwwroot\app_data
+mkdir d:\home\site\wwwroot\app_data\jobs\
+mkdir d:\home\site\wwwroot\app_data\jobs\triggered
+mkdir d:\home\site\wwwroot\app_data\jobs\triggered\updateFeeds
 copy d:\home\site\repository\updateFeeds.cmd d:\home\site\wwwroot\app_data\jobs\triggered\updateFeeds\updateFeeds.cmd 
 copy d:\home\site\repository\settings.job d:\home\site\wwwroot\app_data\jobs\triggered\updateFeeds\settings.job

@@ -24,6 +24,8 @@ param
 #Wake the site up, thereby starting MySQL.  (MySQLInApp is started as a subprocess by IIS).
 $ProgressPreference = "SilentlyContinue"
 Invoke-WebRequest -URI "https://$ENV:WEBSITE_HOSTNAME" -UseBasicParsing -ErrorAction SilentlyContinue
+#Wake the site up, thereby starting MySQL.  (MySQLInApp is started as a subprocess by IIS).
+&"D:\Program Files (x86)\Git\usr\bin\curl.exe" "https://$ENV:WEBSITE_HOSTNAME"
 
 #Open the MysqlConnection 
 [System.Reflection.Assembly]::LoadWithPartialName("MySql.Data")
