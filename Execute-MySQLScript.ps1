@@ -23,9 +23,16 @@ param
 
 #Wake the site up, thereby starting MySQL.  (MySQLInApp is started as a subprocess by IIS).
 $ProgressPreference = "SilentlyContinue"
-Invoke-WebRequest -URI "https://$ENV:WEBSITE_HOSTNAME" -UseBasicParsing -ErrorAction SilentlyContinue
+
 #Wake the site up, thereby starting MySQL.  (MySQLInApp is started as a subprocess by IIS).
-&"D:\Program Files (x86)\Git\usr\bin\curl.exe" "https://$ENV:WEBSITE_HOSTNAME"
+$curlPath = Invoke-Expression -Command 'cmd /c "where curl"'
+$siteUrl = "https://$ENV:WEBSITE_HOSTNAME"
+if (-not ([String]::IsNullOrWhiteSpace($curlPath))) {
+    Invoke-Expression -Command "& $curlPath $siteUrl" -Verbose 
+}
+else {
+    Write-Debug "curl not in path."
+}
 
 #Open the MysqlConnection 
 [System.Reflection.Assembly]::LoadWithPartialName("MySql.Data")

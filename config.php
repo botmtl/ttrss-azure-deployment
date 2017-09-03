@@ -29,7 +29,7 @@
     // *** Basic settings (important!) ***
     // ***********************************
     define('_SKIP_SELF_URL_PATH_CHECKS', true);
-    define('SELF_URL_PATH', $_SERVER["HTTP_HOST"]);
+    define('SELF_URL_PATH', 'https://' . $_SERVER['HTTP_HOST']);
     // Full URL of your tt-rss installation. This should be set to the
     // location of tt-rss directory, e.g. http://example.org/tt-rss/
     // You need to set this option correctly otherwise several features
