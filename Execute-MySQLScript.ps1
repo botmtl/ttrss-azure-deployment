@@ -2,15 +2,17 @@
 [OutputType([int])]
 param
 (
-    #Path to mysql script
+    #Path to MySQL script file
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true,Position=0,ParameterSetName="Script")]
     [ValidateScript({Test-Path $_ })]
     [string]$ScriptPath,
 
+    #MySQL command to run
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true,Position=0,ParameterSetName="Command")]
     [string]$Command,
-        
+
     #Defaults to correct MySQLInApp connection string for this instance
+    #MySQL connector needs a seperate Port= section in the connection string
     [Parameter(Mandatory=$false, Position=1)]
     [ValidateScript({ -not ($ConnectionString -eq "") })]
     [string]$ConnectionString = 
@@ -44,7 +46,7 @@ if ([String]::IsNullOrWhiteSpace($Command)) {
 #Execute SQL statement(s)
 try {
     $MySqlScript = New-Object -TypeName MySql.Data.MySqlClient.MySqlScript -ArgumentList $Connection, $SQL
-    $statementsCount = $MySqlScript.Execute();
+    $statementsCount = $MySqlScript.Execute()
     Write-Debug "$statementsCount statements were executed."
 }
 catch {

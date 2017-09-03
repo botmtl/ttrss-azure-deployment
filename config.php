@@ -2,11 +2,14 @@
     // *******************************************
     // *** Database configuration (important!) ***
     // *******************************************
-
-    $MYSQLCONNSTR = $_SERVER['MYSQLCONNSTR_localdb'];
-    if ($MYSQLCONNSTR == null) {
-        //local development
-        $MYSQLCONNSTR="Database=tttest;Data Source=127.0.0.1:3306;User Id=tttest;Password=tttest";
+    #when started from the command line, 
+    $MYSQLCONNSTR = file_get_contents("D:\home\data\mysql\MYSQLCONNSTR_localdb.txt");
+    if ($MYSQLCONNSTR == false) {
+        $MYSQLCONNSTR = $_SERVER['MYSQLCONNSTR_localdb'];
+        if ($MYSQLCONNSTR == null) {
+            //local development
+            $MYSQLCONNSTR="Database=tttest;Data Source=127.0.0.1:3306;User Id=tttest;Password=tttest";
+        }
     }
     $re = '/Database=(?<DB_NAME>.+?);Data Source=(?<DB_HOST>.*?)(\:)?(?<DB_PORT>[0-9]{3,})?;User Id\=(?<DB_USER>.+?);Password\=(?<DB_PASS>.*)/';
 
@@ -25,8 +28,8 @@
     // ***********************************
     // *** Basic settings (important!) ***
     // ***********************************
-
-    define('SELF_URL_PATH', 'https://' . $_SERVER['HTTP_HOST']);
+    define('_SKIP_SELF_URL_PATH_CHECKS', true);
+    define('SELF_URL_PATH', $_SERVER["HTTP_HOST"]);
     // Full URL of your tt-rss installation. This should be set to the
     // location of tt-rss directory, e.g. http://example.org/tt-rss/
     // You need to set this option correctly otherwise several features
@@ -44,7 +47,7 @@
     // Warning: changing this key will make your stored feed passwords impossible
     // to decrypt.
 
-    define('SINGLE_USER_MODE', true);
+    define('SINGLE_USER_MODE', false);
     // Operate in single user mode, disables all functionality related to
     // multiple users and authentication. Enabling this assumes you have
     // your tt-rss directory protected by other means (e.g. http auth).
@@ -62,7 +65,7 @@
     // *** Files and directories ***
     // *****************************
 
-    define('PHP_EXECUTABLE', $PHP_BINARY);
+    define('PHP_EXECUTABLE', "D:\Program Files (x86)\PHP\v7.0\php.exe");
     // Path to PHP *COMMAND LINE* executable, used for various command-line tt-rss
     // programs and update daemon. Do not try to use CGI binary here, it won't work.
     // If you see HTTP headers being displayed while running tt-rss scripts,
