@@ -9,16 +9,7 @@ param
 
     #MySQL command to run
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true,Position=0,ParameterSetName="Command")]
-    [string]$Command,
-
-    #Defaults to correct MySQLInApp connection string for this instance
-    #MySQL connector needs a seperate Port= section in the connection string
-    [Parameter(Mandatory=$false, Position=1)]
-    [ValidateScript({ -not ($ConnectionString -eq "") })]
-    [string]$ConnectionString = 
-        [String]::Format("{0}{1}", 
-                            "SslMode=none;", 
-                            (Get-Content -LiteralPath "D:\home\data\mysql\MYSQLCONNSTR_localdb.txt").Replace(":",";Port="))
+    [string]$Command
 )
 
 #Wake the site up, thereby starting MySQL.  (MySQLInApp is started as a subprocess by IIS).
@@ -28,10 +19,17 @@ $ProgressPreference = "SilentlyContinue"
 $curlPath = Invoke-Expression -Command 'cmd /c "where curl"'
 $siteUrl = "https://$ENV:WEBSITE_HOSTNAME"
 if (-not ([String]::IsNullOrWhiteSpace($curlPath))) {
-    Invoke-Expression -Command "& $curlPath $siteUrl" -Verbose 
+    Invoke-Expression -Command "& ""$curlPath"" ""$siteUrl""" -Verbose -ErrorAction SilentlyContinue  | Out-Null
 }
 else {
-    Write-Debug "curl not in path."
+    Write-Warning "curl not in path."
+}
+
+if (Test-Path "D:\home\data\mysql\MYSQLCONNSTR_localdb.txt") {
+    $ConnectionString = [String]::Format("{0}{1}", "SslMode=none;", (Get-Content -LiteralPath "D:\home\data\mysql\MYSQLCONNSTR_localdb.txt").Replace(":",";Port="))
+}
+else {
+    Write-Error "MYSQLCONNSTR_localdb.txt was not found."
 }
 
 #Open the MysqlConnection 
