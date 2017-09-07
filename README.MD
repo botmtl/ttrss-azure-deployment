@@ -17,3 +17,6 @@ This Tiny-Tiny RSS deployement is made on an UNSUPORTED PLATFORM.  If you are ha
 - These Azure modules are free to use (this project can be deployed on a student [Microsoft Imagine](https://imagine.microsoft.com/) subscription).
 - Usual restrictions apply (1Tb disk space and you can't abuse your free default vm without it disabling itself until the end of the month).
 
+# WebJobs dashboard
+- Check your WebJobs dashboard after deployement for a few debug/helper jobs.
+![Webjobs Dashboard](https://github.com/botmtl/ttrss-azure-deployment/raw/master/AzureWebjobs.jpg "Webjobs")
