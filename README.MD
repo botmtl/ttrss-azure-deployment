@@ -19,4 +19,5 @@ This Tiny-Tiny RSS deployement is made on an UNSUPORTED PLATFORM.  If you are ha
 
 # WebJobs dashboard
 - Check your WebJobs dashboard after deployement for a few debug/helper jobs.
+
 ![Webjobs Dashboard](https://github.com/botmtl/ttrss-azure-deployment/raw/master/AzureWebjobs.jpg "Webjobs")
