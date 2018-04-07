@@ -4,7 +4,7 @@ echo Deploying files...
 erase d:\home\site\wwwroot\hostingstart.html
 
 REM get tt-rss to wwwroot
-git clone --depth 1 https://git.tt-rss.org/git/tt-rss.git d:\home\site\wwwroot 
+git clone --depth 1 https://git.tt-rss.org/fox/tt-rss.git d:\home\site\wwwroot 
 
 REM copy config.php to app
 copy d:\home\site\repository\config.php d:\home\site\wwwroot
